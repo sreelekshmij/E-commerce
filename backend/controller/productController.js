@@ -9,6 +9,7 @@ const createProduct = async (req, res) => {
     console.log(savedProduct)
     res.status(201).json(savedProduct);
   } catch (error) {
+    console.log(error,"error")
     res.status(500).json({ message: error });
   }
 };

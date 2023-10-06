@@ -7,12 +7,12 @@ const Product = ({product}) => {
   const {addToCart} = useContext(CartContext)
   const {_id, img, category, title, price, inStock} = product;
 
-  const handleAddToCart = () => {
-    console.log(inStock,"hjfru")
+  const handleAddToCart = async () => {
+    // console.log(inStock,"hjfru")
     if (inStock) {
-      addToCart(product, _id);
+      await addToCart(product, _id);
     } else {
-      console.log("gvfjdgfjsdg")
+      // console.log("gvfjdgfjsdg")
       alert('This product is out of stock.');
     }
   };

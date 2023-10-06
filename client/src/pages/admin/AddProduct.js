@@ -4,7 +4,16 @@ import axios from "axios";
 
 const AddProduct = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    title: "",
+    desc: "",
+    img: File,
+    categories: "",
+    size: "",
+    color: "",
+    price: "",
+    stock: "",
+  });
 
   // const [errors, setErrors] = useState({
   //   title: "",

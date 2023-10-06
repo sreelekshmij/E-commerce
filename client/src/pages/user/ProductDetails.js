@@ -43,7 +43,7 @@ const ProductDetails = () => {
               <p className="mb-8">{desc}</p>
               {inStock ? (
                 <button
-                  onClick={addToCart(product, product._id)}
+                  onClick={()=> addToCart(product,id)}
                   className="bg-primary py-4 px-8 text-white"
                 >
                   Add To Cart

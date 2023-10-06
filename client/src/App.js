@@ -36,8 +36,7 @@ const App = () => {
           <Route path='/resetpassword' element = {<LogAuthGuard element={<ResetPass />} />} />
           <Route path='/verify' element = {<LogAuthGuard element={<Verification />} />} />
           
-          <Route path='/' element={<Home />} />
-          <Route path='/user' element= {<AdAuthGuard allowedRoles={['user']} element={<Home />} />}  />
+          <Route path='/' element={<Home />}  />
           <Route path='/product/:id' element= {<AdAuthGuard allowedRoles={['user']} element={<ProductDetails />} />}  />
           <Route path='/checkout' element={<AdAuthGuard allowedRoles={['user']} element={<Checkout />} />} />
           <Route path='/success' element = {<AdAuthGuard allowedRoles={['user']} element={<Success />} />} />

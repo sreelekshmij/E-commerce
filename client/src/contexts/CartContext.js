@@ -15,7 +15,7 @@ const CartProvider = ({ children }) => {
     setTotal(total);
   },[cart]);
   
-  // console.log(cart, "check cart");
+  console.log(cart, "check cart");
   
   const getCart = async () => {
     const uid = localStorage.getItem("user");
@@ -28,7 +28,7 @@ const CartProvider = ({ children }) => {
       (accumulator, currentValue) => accumulator + currentValue.quantity,
       0
       );
-      // console.log(response.data,"userCart")
+      console.log(response.data,"userCart")
       let products = []
       products = response.data.products.map((x) => {
         if (!products.includes(x)) {
@@ -36,27 +36,34 @@ const CartProvider = ({ children }) => {
           return x.productId; 
         }
       });
-      // console.log(products, "check products");
+      console.log(products, "check products");
       setCart(products);
       setItemAmount(sum);
     };
     
-    const addToCart = async (product,_id) => {
-      await axios.post(
-        "http://localhost:8080/v1/cart/add",
-        {
-          userId: `${localStorage.getItem("user")}`,
-          productId: _id,
-          quantity: 1,
-        },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+    const addToCart = async (product, _id) => {
+      try {
+        console.log("hellooo");
+        const response = await axios.post(
+          "http://localhost:8080/v1/cart/add",
+          {
+            userId: localStorage.getItem("user"),
+            productId: _id,
+            quantity: 1,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          }
+        );
+        await getCart();
+        console.log(response.data, "cart");
+      } catch (error) {
+        console.error("Error adding item to cart:", error);
       }
-    );
-    getCart();
-  };
+    };
+    
 
   const removeFromCart = async (product,_id) => {
     setCart((prevCart) => prevCart.filter((item) => item._id !== _id));
@@ -74,7 +81,7 @@ const CartProvider = ({ children }) => {
       }
     );
     // console.log(response, "newcart");
-    getCart();
+    await getCart();
   };
 
   const clearCart = async () => {

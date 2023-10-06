@@ -21,17 +21,13 @@ const AdAuthGuard = ({ allowedRoles, element }) => {
         );
         const data = response.data;
 
-        // Check if data is an object
         if (typeof data === "object" && !Array.isArray(data)) {
-          // Set the user state
           setUser(data);
         } else {
           console.error("Invalid response data format:", data);
-          // Handle the error or return an appropriate value
         }
       } catch (error) {
         console.error("Error fetching user:", error);
-        // Handle the error or return an appropriate value
       }
     };
 
@@ -42,16 +38,15 @@ const AdAuthGuard = ({ allowedRoles, element }) => {
   }
 
   if (!user) {
-    // If user data is still loading, you can return a loading indicator or null
     return null;
   }
 
-  console.log("isLoggedIn:", isLoggedIn);
-  console.log("user:", user);
-  console.log("allowedRoles:", allowedRoles);
+  // console.log("isLoggedIn:", isLoggedIn);
+  // console.log("user:", user);
+  // console.log("allowedRoles:", allowedRoles);
   if (allowedRoles) {
     if (user.isAdmin && allowedRoles.includes('admin')) {
-      console.log(element, "elr");
+      // console.log(element, "elr");
       return element;
     } else if (!user.isAdmin && allowedRoles.includes("user")) {
       return element;

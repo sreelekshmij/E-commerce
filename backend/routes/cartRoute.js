@@ -3,7 +3,7 @@ const router = express.Router()
 const { authenticateToken, verifyAndAuthenticate } = require('../middlewares/auth')
 const cartController = require('../controller/cartController')
 
-router.post('/add', verifyAndAuthenticate, cartController.createCart);
+router.post('/add', authenticateToken, cartController.createCart);
 
 router
 .patch('/:userId',verifyAndAuthenticate, cartController.updateCart)
